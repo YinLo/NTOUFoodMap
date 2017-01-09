@@ -1,5 +1,6 @@
 package yclo.ntoufoodmap;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView user = null;
     private TextView pwd = null;
     private Gson gson = new Gson();
+    private AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,15 @@ public class LoginActivity extends AppCompatActivity {
                         intent.setClass(LoginActivity.this, IndexActivity.class);
                         startActivity(intent);
                         finish();
+                    }else{
+                        dialog.setTitle("錯誤");
+                        dialog.setMessage("請至信箱驗證");
+                        dialog.show();
                     }
+                }else{
+                    dialog.setTitle("錯誤");
+                    dialog.setMessage("帳號/密碼錯誤");
+                    dialog.show();
                 }
             }
         });
