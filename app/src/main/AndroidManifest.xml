@@ -3,9 +3,10 @@
     package="yclo.ntoufoodmap">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -13,6 +14,10 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"></uses-feature>
 
     <application
         android:allowBackup="true"
@@ -60,10 +65,14 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".AppraiseActivity"
-            android:parentActivityName=".StoreActivity" />/>
-        <activity android:name=".CommentActivity"
-            android:parentActivityName=".AppraiseActivity" />/>
+        <activity
+            android:name=".AppraiseActivity"
+            android:parentActivityName=".StoreActivity" />
+        />
+        <activity
+            android:name=".CommentActivity"
+            android:parentActivityName=".AppraiseActivity" />
+        />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -78,8 +87,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:parentActivityName=".StoreActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".StoreActivity" />
     </application>
 
 </manifest>

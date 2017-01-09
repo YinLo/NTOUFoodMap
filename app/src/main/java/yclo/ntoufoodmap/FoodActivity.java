@@ -40,7 +40,7 @@ public class FoodActivity extends AppCompatActivity {
 
         //取出Store ID(暫時先用商店名稱做靜態)
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
-        txt_store_name.setText(RecommendActivity.store_name.get(indexOfList_prefs));
+        txt_store_name.setText(Cookies.getStoreName().get(indexOfList_prefs));
 //        if (indexOfList_prefs != null) {
 //            indexOfList_prefs = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
 //            txt_store_name.setText(indexOfList_prefs);

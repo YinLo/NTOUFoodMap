@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,19 +35,17 @@ public class StoreActivity extends AppCompatActivity {
         //取出Index of Store List
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
-        store_name.setText(RecommendActivity.store_name.get(indexOfList_prefs));
-//        if (indexOfList_prefs != null) {
-//            indexOfList_prefs = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
-//            store_name.setText(indexOfList_prefs);
-//        }
+        store_name.setText(Cookies.getStoreName().get(indexOfList_prefs));
+
 
         //商店評分
         float RatingBarOfList_prefs = prefs.getFloat("RatingBarOfList_PREFS", 0);
         RatingBar rb_scoring = (RatingBar) findViewById(R.id.ratingBar);
-        rb_scoring.setRating(RecommendActivity.scoring.get(indexOfList_prefs));
+        rb_scoring.setRating(Cookies.getStoreScore().get(indexOfList_prefs));
         if (RatingBarOfList_prefs == 0) {
             rb_scoring.setRating(0);
         }
+        //Toast.makeText(getApplicationContext(), RecommendActivity.scoring.get(indexOfList_prefs).toString(), Toast.LENGTH_SHORT).show();
 
         //切換至錯誤回報
         btnReport = (ImageButton)findViewById(R.id.btnReport);

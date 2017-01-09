@@ -35,9 +35,9 @@ public class RecommendActivity extends AppCompatActivity {
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
-    static ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
-    static ArrayList<String> store_name = Cookies.getStoreName();
-    static ArrayList<Float> scoring = Cookies.getStoreScore();
+    private ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
+    private ArrayList<String> store_name = Cookies.getStoreName();
+    private ArrayList<Float> scoring = Cookies.getStoreScore();
     ArrayList<String> tag = Cookies.getStoreTag();
     static int selectdStore;
 
@@ -93,7 +93,7 @@ public class RecommendActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = getSharedPreferences("Store", MODE_PRIVATE).edit();
                 //儲存該Store ID(暫時先用商店名稱做靜態)
                 editor.putInt("IndexOfList_PREFS", position);
-                //editor.putFloat("RatingBarOfList_PREFS", scoring.get(position));
+                editor.putFloat("RatingBarOfList_PREFS", scoring.get(position));
                 editor.commit();
                 selectdStore = store_id.get(position);
 
