@@ -30,4 +30,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     compile group: 'com.google.code.gson', name: 'gson', version: '2.3.1'
+    compile 'net.gotev:uploadservice:2.1'
 }

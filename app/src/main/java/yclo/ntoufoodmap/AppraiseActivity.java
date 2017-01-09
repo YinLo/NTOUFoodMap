@@ -1,6 +1,7 @@
 package yclo.ntoufoodmap;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,9 +34,16 @@ public class AppraiseActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(AppraiseActivity.this, CommentActivity.class);
-                startActivity(intent);
+                if(Cookies.getRights()>=0) {
+                    Intent intent = new Intent();
+                    intent.setClass(AppraiseActivity.this, CommentActivity.class);
+                    startActivity(intent);
+                }else{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(AppraiseActivity.this);
+                    dialog.setTitle("警告");
+                    dialog.setMessage("此功能僅限已註冊用戶使用!");
+                    dialog.show();
+                }
             }
         });
     }

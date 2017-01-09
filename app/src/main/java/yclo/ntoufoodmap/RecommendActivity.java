@@ -3,6 +3,7 @@ package yclo.ntoufoodmap;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,9 +108,16 @@ public class RecommendActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(RecommendActivity.this, AddActivity.class);
-                startActivity(intent);
+                if(Cookies.getRights()>=0) {
+                    Intent intent = new Intent();
+                    intent.setClass(RecommendActivity.this, AddActivity.class);
+                    startActivity(intent);
+                }else{
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(RecommendActivity.this);
+                    dialog.setTitle("警告");
+                    dialog.setMessage("此功能僅限已註冊用戶使用!");
+                    dialog.show();
+                }
             }
         });
 

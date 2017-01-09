@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnLogin = null;
     private Button btnRegist = null;
+    private Button btnGuest = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,18 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, RegistActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnGuest = (Button)findViewById(R.id.btnGuest);
+        btnGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cookies.setRights(-1);
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, IndexActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

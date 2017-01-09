@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView user = null;
     private TextView pwd = null;
     private Gson gson = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +38,10 @@ public class LoginActivity extends AppCompatActivity {
                 .penaltyDeath()
                 .build());
 
-        user = (TextView)findViewById(R.id.txtUser);
-        pwd = (TextView)findViewById(R.id.txtPwd);
+        user = (TextView) findViewById(R.id.txtUser);
+        pwd = (TextView) findViewById(R.id.txtPwd);
 
-        btnLogin = (Button)findViewById(R.id.btnLogin);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,13 +49,13 @@ public class LoginActivity extends AppCompatActivity {
                 String response = "";
                 try {
                     response = ConnectAPI.sendPost("API/login.php", "user=" + user.getText().toString() + "&pwd=" + pwd.getText().toString());
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
                 UserData userData = gson.fromJson(response, UserData.class);
-                if(userData.getSuccess()==1) {
-                    if(userData.getContent().get("verfication").equals("1")) {
+                if (userData.getSuccess() == 1) {
+                    if (userData.getContent().get("verfication").equals("1")) {
                         Cookies.setUserid(userData.getContent().get("userid"));
                         Cookies.setUsername(userData.getContent().get("username"));
                         Cookies.setRights(Integer.parseInt(userData.getContent().get("rights")));
@@ -62,33 +63,34 @@ public class LoginActivity extends AppCompatActivity {
                         intent.setClass(LoginActivity.this, IndexActivity.class);
                         startActivity(intent);
                         finish();
-                    }else{
+                    } else {
                         dialog.setTitle("錯誤");
                         dialog.setMessage("請至信箱驗證");
                         dialog.show();
                     }
-                }else{
+                } else {
                     dialog.setTitle("錯誤");
                     dialog.setMessage("帳號/密碼錯誤");
                     dialog.show();
                 }
             }
         });
+
     }
 
-    class UserData{
+    class UserData {
         private int success;
         private Map<String, String> content;
 
-        public UserData(){
+        public UserData() {
 
         }
 
-        public int getSuccess(){
-            return  success;
+        public int getSuccess() {
+            return success;
         }
 
-        public Map<String, String> getContent(){
+        public Map<String, String> getContent() {
             return content;
         }
     }
