@@ -56,7 +56,6 @@ public class FoodActivity extends AppCompatActivity {
         try {
             String r = ConnectAPI.sendPost("API/getMenu.php", "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs);
             //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
-            //String r = ConnectAPI.sendPost("API/getMenu.php","" );
             Type type = new TypeToken<List<FoodList>>() {
             }.getType();
             menu = new Gson().fromJson(r, type);
@@ -81,6 +80,15 @@ public class FoodActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 like_ornot.set(position, !(like_ornot.get(position) || false));
                 ImageView img_likeOrNot = (ImageView) view.findViewById(R.id.imgLike);
+                try {
+                    String r = ConnectAPI.sendPost("API/likeFood.php", "user=" + Cookies.getUserid() + "&foodid=" + food_id.get(position)  + "&likeornot=" + like_ornot.get(position).toString());
+                    //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&foodid=" + food_id.get(position)  + "&likeornot=" + like_ornot.get(position).toString(), Toast.LENGTH_SHORT).show();
+                    Type type = new TypeToken<List<FoodList>>() {
+                    }.getType();
+                    menu = new Gson().fromJson(r, type);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (like_ornot.get(position)) {
                     img_likeOrNot.setImageResource(R.drawable.like);
                 } else {
