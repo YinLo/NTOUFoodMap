@@ -38,7 +38,9 @@
         <activity
             android:name=".RegistActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".IndexActivity" />
+        <activity
+            android:name=".IndexActivity"
+            android:parentActivityName=".MainActivity" />/>
         <activity
             android:name=".RecommendActivity"
             android:parentActivityName=".IndexActivity" />
@@ -67,12 +69,19 @@
 
         <activity
             android:name=".AppraiseActivity"
+<<<<<<< HEAD
             android:parentActivityName=".StoreActivity" />
         />
         <activity
             android:name=".CommentActivity"
             android:parentActivityName=".AppraiseActivity" />
         />
+=======
+            android:parentActivityName=".StoreActivity" />/>
+        <activity
+            android:name=".CommentActivity"
+            android:parentActivityName=".AppraiseActivity" />/>
+>>>>>>> 1bc98fa6e385d76f64c1419d85b58431979204be
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
