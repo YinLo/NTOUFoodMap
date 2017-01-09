@@ -3,8 +3,8 @@
     package="yclo.ntoufoodmap">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!--
@@ -33,7 +33,9 @@
         <activity
             android:name=".RegistActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".IndexActivity" />
+        <activity
+            android:name=".IndexActivity"
+            android:parentActivityName=".MainActivity" />/>
         <activity
             android:name=".RecommendActivity"
             android:parentActivityName=".IndexActivity" />
@@ -60,9 +62,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".AppraiseActivity"
+        <activity
+            android:name=".AppraiseActivity"
             android:parentActivityName=".StoreActivity" />/>
-        <activity android:name=".CommentActivity"
+        <activity
+            android:name=".CommentActivity"
             android:parentActivityName=".AppraiseActivity" />/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -78,8 +82,8 @@
 
         <activity
             android:name=".MapsActivity"
-            android:parentActivityName=".StoreActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".StoreActivity" />
     </application>
 
 </manifest>
