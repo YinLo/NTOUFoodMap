@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -47,13 +48,14 @@ public class FoodActivity extends AppCompatActivity {
         //取出餐點種類
         String mealType_prefs = prefs.getString("MealType_PREFS", null);
         txt_meal_type.setText(mealType_prefs);
-        if (mealType_prefs != null) {
+        if (mealType_prefs.equals("")) {
             mealType_prefs = prefs.getString("MealType_PREFS", "No name defined");//"No name defined" is the default value.
             txt_meal_type.setText(mealType_prefs);
         }
 
         try {
-            String r = ConnectAPI.sendPost("API/getMenu.php", "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore));
+            String r = ConnectAPI.sendPost("API/getMenu.php", "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs);
+            //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
             //String r = ConnectAPI.sendPost("API/getMenu.php","" );
             Type type = new TypeToken<List<FoodList>>() {
             }.getType();

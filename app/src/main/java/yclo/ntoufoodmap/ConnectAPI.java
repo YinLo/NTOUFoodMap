@@ -1,8 +1,10 @@
 package yclo.ntoufoodmap;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -30,7 +32,10 @@ public class ConnectAPI{
         // Send post request
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(parameters);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(wr, "UTF-8"));
+        writer.write(parameters);
+        writer.flush();
+        writer.close();
         wr.flush();
         wr.close();
 
