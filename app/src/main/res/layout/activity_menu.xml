@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_menu"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="yclo.ntoufoodmap.MenuActivity"
+    android:background="@android:color/background_dark">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="3">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtStorename"
+            android:textSize="40sp"
+            android:textColor="@android:color/white" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:id="@+id/ratingBar"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4"
+            android:layout_below="@+id/txtStorename"
+            android:layout_marginTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:text="套餐"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMenu"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickSetMeal"/>
+
+        <TextView
+            android:text="主餐"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMap"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickMainCourse"/>
+
+        <TextView
+            android:text="飲料"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtComments"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickDrink"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

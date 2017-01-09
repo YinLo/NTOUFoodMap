@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="@android:color/background_dark">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtStorename"
+            android:textSize="40sp"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:text="AM06:00~PM24:00"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHours"
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:id="@+id/ratingBar"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleSmall"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="4"
+            android:layout_below="@+id/txtHours"
+            android:layout_marginTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingTop="2dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6.5"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:text="餐點清單"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMenu"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickMenu" />
+
+        <TextView
+            android:text="地圖"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMap"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickMap"/>
+
+        <TextView
+            android:text="評分與評論"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtComments"
+            android:textSize="34sp"
+            android:textColor="@android:color/white"
+            android:paddingBottom="4dp"
+            android:clickable="true"
+            android:onClick="onClickComments"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/nopic"
+            android:id="@+id/imageView" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/report"
+            android:id="@+id/btnReport"
+            android:background="@android:color/background_dark" />
+    </LinearLayout>
+
+</LinearLayout>
