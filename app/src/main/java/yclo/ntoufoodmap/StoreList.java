@@ -14,11 +14,38 @@ public class StoreList {
     String image;
     float score;
 
+
     public StoreList(){
 
     }
 
+    public int getStoreid() {
+        return storeid;
+    }
+
     public String getStorename() {
         return storename;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getBusinesshours() {
+        return businesshours;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+    public String getImage() {
+        return image;
+    }
+    public float getScore() {
+        return score;
     }
 }

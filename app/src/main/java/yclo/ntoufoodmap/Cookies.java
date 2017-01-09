@@ -1,11 +1,12 @@
 package yclo.ntoufoodmap;
 
+import java.lang.reflect.Type;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
-
-import yclo.ntoufoodmap.ConnectAPI;
-import yclo.ntoufoodmap.StoreList;
+import java.util.List;
 
 /**
  * Created by Yin on 2017/1/8.
@@ -20,7 +21,8 @@ public class Cookies {
     static{
         try{
             String r = ConnectAPI.sendPost("API/getStores.php","");
-            store = new Gson().fromJson(r, ArrayList.class);
+            Type type = (Type) new TypeToken<List<StoreList>>(){}.getType();
+            store = new Gson().fromJson(r, (java.lang.reflect.Type) type);
         }catch (Exception e){e.printStackTrace();}
     }
     public static void setUserid(String u) {
@@ -47,6 +49,14 @@ public class Cookies {
         return rights;
     }
 
+    public static ArrayList<Integer> getStoreID(){
+        ArrayList<Integer> id = new ArrayList<>();
+        for(StoreList s : store){
+            id.add(s.getStoreid());
+        }
+        return id;
+    }
+
     public static ArrayList<String> getStoreName(){
         ArrayList<String> name = new ArrayList<>();
         for(StoreList s : store){
@@ -54,6 +64,16 @@ public class Cookies {
         }
         return name;
     }
+
+    public static ArrayList<Float> getStoreScore(){
+        ArrayList<Float> score = new ArrayList<>();
+        for(StoreList s : store){
+            score.add(s.getScore());
+        }
+        return score;
+    }
+
+
 
     public static ArrayList<StoreList> getStore(){
         return store;

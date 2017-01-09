@@ -2,6 +2,7 @@ package yclo.ntoufoodmap;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,23 +17,35 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class RecommendActivity extends AppCompatActivity {
 
     ListView store_list;
+    private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
-    ArrayList<Integer> store_id = new <Integer>ArrayList( Arrays.asList(1, 2, 3, 4, 5, 6, 7) );  // 搜尋資料庫用
-    ArrayList<String> store_name = new <String>ArrayList(Arrays.asList("工學院餐廳", "夢泉餐廳", "麥當勞", "肯德基", "摩斯漢堡", "阿華炒麵", "貴族世家"));
-    ArrayList<Double> scoring = new <Double>ArrayList(Arrays.asList(5.0, 5.0, 4.5, 3.5, 3.0, 1.0, 1.0));
+    ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
+    ArrayList<String> store_name = Cookies.getStoreName();
+    ArrayList<Float> scoring = Cookies.getStoreScore();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+
+        ArrayList<String> store = Cookies.getStoreName();
+
+
+
+
 
         //種類標籤下拉式選單
         Spinner spinner = (Spinner) findViewById(R.id.spirTag);
@@ -77,6 +90,7 @@ public class RecommendActivity extends AppCompatActivity {
 
 
     }
+
 
 
 

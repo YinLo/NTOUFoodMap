@@ -19,7 +19,9 @@ public class ConnectAPI{
 
         URL obj = new URL(server+api);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
+        con.setDoInput (true);
+        con.setDoOutput (true);
+        con.setUseCaches (false);
         //add reuqest header
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);

@@ -18,9 +18,9 @@ public class StoreAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     ArrayList<Integer> store_id;
     ArrayList<String> store_name;
-    ArrayList<Double> scoring;
+    ArrayList<Float> scoring;
 
-    public StoreAdapter(Context c, ArrayList<Integer> store_id, ArrayList<String> store_name, ArrayList<Double> scoring) {
+    public StoreAdapter(Context c, ArrayList<Integer> store_id, ArrayList<String> store_name, ArrayList<Float> scoring) {
         inflater = LayoutInflater.from(c);
         this.store_id = store_id;
         this.store_name = store_name;
@@ -45,7 +45,8 @@ public class StoreAdapter extends BaseAdapter {
         store_name2 = (TextView) view.findViewById(R.id.store_name);
         RatingBar rb_scoring = (RatingBar) view.findViewById(R.id.ratingBar);
         store_name2.setText(store_name.get(i));
-        rb_scoring.setRating(scoring.get(i).floatValue());
+        store_name2.setText(store_name.get(i));
+        rb_scoring.setRating(scoring.get(i));
         return view;
     }
 
