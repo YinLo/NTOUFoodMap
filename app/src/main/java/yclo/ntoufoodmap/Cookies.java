@@ -1,4 +1,4 @@
-package test;
+package yclo.ntoufoodmap;
 
 import com.google.gson.Gson;
 
