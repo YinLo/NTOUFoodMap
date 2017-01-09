@@ -1,6 +1,7 @@
 package yclo.ntoufoodmap;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -52,7 +53,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
 
-        String addressString = "海洋大學";
+        SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
+        int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
+        String addressString = Cookies.getStoreAddress().get(indexOfList_prefs);
+        Log.v("zz",addressString);
         double latitude = 0;
         double longitude = 0;
 
@@ -69,7 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         LatLng sydney = new LatLng(latitude,longitude);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("海洋大學"));
+        mMap.addMarker(new MarkerOptions().position(sydney).title(addressString));
 
         mMap.getUiSettings().setZoomControlsEnabled(true);  // 右下角的放大縮小功能
         mMap.getUiSettings().setCompassEnabled(true);       // 左上角的指南針，要兩指旋轉才會出現

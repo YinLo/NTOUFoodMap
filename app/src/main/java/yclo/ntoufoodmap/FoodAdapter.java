@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ro on 2017/1/7.
  */
@@ -15,11 +17,11 @@ import android.widget.TextView;
 public class FoodAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    String[] food_name; //食物
-    Integer[] price;  //按讚數量
-    boolean[] likeOrnot;  //是否按過讚
+    ArrayList<String> food_name; //食物
+    ArrayList<Integer> price;  //按讚數量
+    ArrayList<Boolean> likeOrnot;  //是否按過讚
 
-    public FoodAdapter(Context c, String[] food_name, Integer[] price, boolean[] likeOrnot) {
+    public FoodAdapter(Context c, ArrayList<String> food_name, ArrayList<Integer> price, ArrayList<Boolean> likeOrnot) {
         inflater = LayoutInflater.from(c);
         this.food_name = food_name;
         this.price = price;
@@ -27,7 +29,7 @@ public class FoodAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return food_name.length;
+        return food_name.size();
     }
 
     public Object getItem(int i) {
@@ -44,9 +46,9 @@ public class FoodAdapter extends BaseAdapter {
         txt_foodname = (TextView) view.findViewById(R.id.food_name);
         txt_price = (TextView) view.findViewById(R.id.price);
         ImageView img_likeOrNot = (ImageView)view.findViewById(R.id.imgLike);
-        txt_foodname.setText(food_name[i]);
-        txt_price.setText(price[i].toString());
-        if(likeOrnot[i])
+        txt_foodname.setText(food_name.get(i));
+        txt_price.setText(price.get(i).toString());
+        if(likeOrnot.get(i))
             img_likeOrNot.setImageResource(R.drawable.like);
         else
             img_likeOrNot.setImageResource(R.drawable.unlike);

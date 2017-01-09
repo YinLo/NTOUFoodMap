@@ -31,6 +31,13 @@
             android:id="@+id/txtHours"
             android:textSize="20sp"
             android:textColor="@android:color/white" />
+        <TextView
+            android:text="02-12345678"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtPhone"
+            android:textSize="20sp"
+            android:textColor="@android:color/white" />
 
         <RatingBar
             android:layout_width="wrap_content"

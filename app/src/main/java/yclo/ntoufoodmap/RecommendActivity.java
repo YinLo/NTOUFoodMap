@@ -27,30 +27,31 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import static yclo.ntoufoodmap.R.array.tag_list;
+
 public class RecommendActivity extends AppCompatActivity {
 
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
-    ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
-    ArrayList<String> store_name = Cookies.getStoreName();
-    ArrayList<Float> scoring = Cookies.getStoreScore();
+    static ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
+    static ArrayList<String> store_name = Cookies.getStoreName();
+    static ArrayList<Float> scoring = Cookies.getStoreScore();
+    ArrayList<String> tag = Cookies.getStoreTag();
+    static int selectdStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
 
-        ArrayList<String> store = Cookies.getStoreName();
-
-
-
+        final ArrayList<String> store = Cookies.getStoreName();
 
 
         //種類標籤下拉式選單
-        Spinner spinner = (Spinner) findViewById(R.id.spirTag);
+        final Spinner spinner = (Spinner) findViewById(R.id.spirTag);
         ArrayAdapter<CharSequence> tagList = ArrayAdapter.createFromResource(RecommendActivity.this,
-                R.array.tag_list,
+                tag_list,
                 android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(tagList);
 
@@ -58,6 +59,29 @@ public class RecommendActivity extends AppCompatActivity {
         //將值存進list
         store_list = (ListView) findViewById(R.id.listRest);
         store_list.setAdapter(new StoreAdapter(RecommendActivity.this, store_id, store_name, scoring));
+
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                for(int i=0;i<tag.size();i++) {
+                    if (tag.get(i) != parent.getSelectedItem().toString() || parent.getSelectedItem().toString()=="全部") {
+                        store_list.getChildAt(i).setVisibility(View.VISIBLE);
+                        //Toast.makeText(RecommendActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
+                    } else {
+                        store_list.getChildAt(i).setVisibility(View.GONE);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         //點擊店家list清單
         store_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -67,9 +91,10 @@ public class RecommendActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
                 SharedPreferences.Editor editor = getSharedPreferences("Store", MODE_PRIVATE).edit();
                 //儲存該Store ID(暫時先用商店名稱做靜態)
-                editor.putString("IndexOfList_PREFS", store_name.get(position) );
-                editor.putFloat("RatingBarOfList_PREFS", scoring.get(position).floatValue());
+                editor.putInt("IndexOfList_PREFS", position);
+                //editor.putFloat("RatingBarOfList_PREFS", scoring.get(position));
                 editor.commit();
+                selectdStore = store_id.get(position);
 
                 //換頁
                 Intent intent = new Intent();

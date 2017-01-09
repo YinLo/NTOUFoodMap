@@ -19,12 +19,12 @@ public class MenuActivity extends AppCompatActivity {
         TextView store_name = (TextView) findViewById(R.id.txtStorename);
         //取出Store ID(暫時先用商店名稱做靜態)
         SharedPreferences prefs = getSharedPreferences("Store", MODE_PRIVATE);
-        String indexOfList = prefs.getString("IndexOfList_PREFS", null);
-        store_name.setText(indexOfList);
-        if (indexOfList != null) {
-            indexOfList = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
-            store_name.setText(indexOfList);
-        }
+        int indexOfList = prefs.getInt("IndexOfList_PREFS", -1);
+        store_name.setText(RecommendActivity.store_name.get(indexOfList));
+//        if (indexOfList != -1) {
+//            indexOfList = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
+//            store_name.setText(indexOfList);
+//        }
 
         //商店評分
         float RatingBarOfList_prefs = prefs.getFloat("RatingBarOfList_PREFS", 0);

@@ -21,6 +21,10 @@ import java.util.ArrayList;
 public class StoreActivity extends AppCompatActivity {
 
     ImageButton btnReport = null;
+    TextView txtHours = null;
+    TextView txtPhone = null;
+    ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
+    ArrayList<String> telephone = Cookies.getStoreTelephone();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,19 +32,19 @@ public class StoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_store);
 
         TextView store_name = (TextView) findViewById(R.id.txtStorename);
-        //取出Store ID(暫時先用商店名稱做靜態)
+        //取出Index of Store List
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
-        String indexOfList_prefs = prefs.getString("IndexOfList_PREFS", null);
-        store_name.setText(indexOfList_prefs);
-        if (indexOfList_prefs != null) {
-            indexOfList_prefs = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
-            store_name.setText(indexOfList_prefs);
-        }
+        int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
+        store_name.setText(RecommendActivity.store_name.get(indexOfList_prefs));
+//        if (indexOfList_prefs != null) {
+//            indexOfList_prefs = prefs.getString("IndexOfList_PREFS", "No name defined");//"No name defined" is the default value.
+//            store_name.setText(indexOfList_prefs);
+//        }
 
         //商店評分
         float RatingBarOfList_prefs = prefs.getFloat("RatingBarOfList_PREFS", 0);
         RatingBar rb_scoring = (RatingBar) findViewById(R.id.ratingBar);
-        rb_scoring.setRating(RatingBarOfList_prefs);
+        rb_scoring.setRating(RecommendActivity.scoring.get(indexOfList_prefs));
         if (RatingBarOfList_prefs == 0) {
             rb_scoring.setRating(0);
         }
@@ -55,6 +59,13 @@ public class StoreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        txtHours = (TextView)findViewById(R.id.txtHours);
+        txtHours.setText(businesshours.get(indexOfList_prefs));
+
+        txtPhone = (TextView)findViewById(R.id.txtPhone);
+        txtPhone.setText(telephone.get(indexOfList_prefs));
+
 
     }
 
