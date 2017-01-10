@@ -20,9 +20,9 @@ public class AppraiseAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     ArrayList<String> user_name; //使用者
     ArrayList<String> comments;  //評論
-    ArrayList<Double> scoring;  //評分
+    ArrayList<Float> scoring;  //評分
 
-    public AppraiseAdapter(Context c, ArrayList<String> user_name, ArrayList<String> comments, ArrayList<Double> scoring) {
+    public AppraiseAdapter(Context c, ArrayList<String> user_name, ArrayList<String> comments, ArrayList<Float> scoring) {
         inflater = LayoutInflater.from(c);
         this.user_name = user_name;
         this.comments = comments;
@@ -49,7 +49,7 @@ public class AppraiseAdapter extends BaseAdapter {
         RatingBar rb_scoring = (RatingBar) view.findViewById(R.id.ratingBar);
         txt_username.setText(user_name.get(i));
         txt_comments.setText(comments.get(i));
-        rb_scoring.setRating(scoring.get(i).floatValue());
+        rb_scoring.setRating(scoring.get(i));
         return view;
     }
 }
