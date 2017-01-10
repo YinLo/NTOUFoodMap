@@ -23,6 +23,7 @@ public class Cookies {
     private static String username;
     private static int rights;
     private static ArrayList<StoreList> store;
+    private static int storeid;
 
     static{
         try{
@@ -120,10 +121,15 @@ public class Cookies {
         return score;
     }
 
-
-
     public static ArrayList<StoreList> getStore(){
         return store;
     }
 
+    public static int getStoreid(){
+        return storeid;
+    }
+
+    public static void setStoreid(int sid){
+        storeid = sid;
+    }
 }

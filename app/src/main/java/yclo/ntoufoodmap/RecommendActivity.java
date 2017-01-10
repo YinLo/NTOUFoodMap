@@ -39,7 +39,6 @@ public class RecommendActivity extends AppCompatActivity {
     private ArrayList<String> store_name = Cookies.getStoreName();
     private ArrayList<Float> scoring = Cookies.getStoreScore();
     ArrayList<String> tag = Cookies.getStoreTag();
-    static int selectdStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +94,7 @@ public class RecommendActivity extends AppCompatActivity {
                 editor.putInt("IndexOfList_PREFS", position);
                 editor.putFloat("RatingBarOfList_PREFS", scoring.get(position));
                 editor.commit();
-                selectdStore = store_id.get(position);
+                Cookies.setStoreid(store_id.get(position));
 
                 //換頁
                 Intent intent = new Intent();

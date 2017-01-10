@@ -76,7 +76,7 @@ public class StoreActivity extends AppCompatActivity {
 
 
     //切換至餐點清單
-    public void onClickMenu(View v) {
+    private void onClickMenu(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, MenuActivity.class);
@@ -84,7 +84,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     //切換至地圖
-    public void onClickMap(View v) {
+    private void onClickMap(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, MapsActivity.class);
@@ -92,7 +92,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     //切換至餐點清單
-    public void onClickComments(View v) {
+    private void onClickComments(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, AppraiseActivity.class);

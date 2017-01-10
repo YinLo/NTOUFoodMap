@@ -6,18 +6,23 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 public class CommentActivity extends AppCompatActivity {
 
-    ImageButton btnCorrect = null;
-    ImageButton btnCancel = null;
-
+    private ImageButton btnCorrect = null;
+    private ImageButton btnCancel = null;
+    private EditText editReport = null;
+    private RatingBar ratingBar = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+
+        ratingBar = (RatingBar)findViewById(R.id.ratingBar);
         btnCorrect = (ImageButton) findViewById(R.id.btnCorrect);
         btnCorrect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +61,12 @@ public class CommentActivity extends AppCompatActivity {
                         intent.setClass(CommentActivity.this, AppraiseActivity.class);
 
                         /*傳送資料庫返回評論頁面動作(未做)*/
-
+                        try{
+                            String p = "storeid=" + Cookies.getStoreid() + "&userid=" + Cookies.getUserid() + "&con=" + editReport.getText()+"&rt="+ratingBar.getRating();
+                            String r = ConnectAPI.sendPost("API/addComments.php", p);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
                         startActivity(intent);
                     }
                 })
