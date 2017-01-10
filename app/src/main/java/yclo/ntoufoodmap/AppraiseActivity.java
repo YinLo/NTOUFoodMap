@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -99,5 +100,15 @@ public class AppraiseActivity extends AppCompatActivity {
             tmp.add(c.getScore());
         }
         return tmp;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.setClass(AppraiseActivity.this, StoreActivity.class);
+            startActivity(intent);
+        }
+        return false;
     }
 }

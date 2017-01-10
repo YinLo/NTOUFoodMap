@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -74,7 +75,7 @@ public class CommentActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(CommentActivity.this,
                                 CommentData.getContent(), Toast.LENGTH_SHORT);
                         toast.show();
-
+                        Cookies.update();
                         Intent intent = new Intent();
                         intent.setClass(CommentActivity.this, AppraiseActivity.class);
 
@@ -117,6 +118,15 @@ public class CommentActivity extends AppCompatActivity {
         about_dialog.show();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent();
+            intent.setClass(CommentActivity.this, AppraiseActivity.class);
+            startActivity(intent);
+        }
+        return false;
+    }
 
     class CommentData {
         private int success;

@@ -33,9 +33,6 @@ import static yclo.ntoufoodmap.Cookies.getStoreForTag;
 import static yclo.ntoufoodmap.R.array.tag_list;
 
 public class RecommendActivity extends AppCompatActivity {
-    static{
-        Cookies.update();
-    }
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
@@ -53,7 +50,7 @@ public class RecommendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recommend);
 
         final ArrayList<String> store = Cookies.getStoreName();
-
+        scoring = Cookies.getStoreScore();
 
         //種類標籤下拉式選單
         final Spinner spinner = (Spinner) findViewById(R.id.spirTag);
