@@ -31,37 +31,40 @@ public class RegistActivity extends AppCompatActivity {
         editUsername = (EditText) findViewById(R.id.editUsername);
         editMail = (EditText) findViewById(R.id.editMail);
 
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(RegistActivity.this);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(RegistActivity.this);
                 if (5 > editUserid.length() || editUserid.length() > 16) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入帳號(5~16字元)");
-                }else
-                if (5 > editPwd.length() || editPwd.length() > 16) {
+                    dialog.show();
+                } else if (5 > editPwd.length() || editPwd.length() > 16) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入密碼(5~16字元)");
-                }else
-                if (editUsername.length()<=0) {
+                    dialog.show();
+                } else if (editUsername.length() <= 0) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入使用者名稱");
-                }else
-                if (editMail.length()<=0) {
+                    dialog.show();
+                } else if (editMail.length() <= 0) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入信箱");
-                }else{
+                    dialog.show();
+                } else {
                     try {
-                        String p = "account="+editUserid.getText()+"&pwd="+editPwd.getText()+"&name="+editUsername.getText()+"&email="+editMail.getText();
+                        String p = "account=" + editUserid.getText() + "&pwd=" + editPwd.getText() + "&name=" + editUsername.getText() + "&email=" + editMail.getText();
                         String r = ConnectAPI.sendPost("API/register.php", p);
                         RegData rd = new Gson().fromJson(r, RegData.class);
-                        if(rd.getSuccess() == 1){
+                        if (rd.getSuccess() == 1) {
                             dialog.setTitle("系統提示");
                             dialog.setMessage(rd.getContent());
+                            dialog.show();
                             clearText();
-                        }else if(rd.getSuccess() == 0){
+                        } else if (rd.getSuccess() == 0) {
                             dialog.setTitle("系統錯誤");
                             dialog.setMessage(rd.getContent());
+                            dialog.show();
                             editMail.setText("");
                             editPwd.setText("");
                         }
@@ -75,25 +78,28 @@ public class RegistActivity extends AppCompatActivity {
 
     }
 
-    private void clearText(){
+    private void clearText() {
         editUserid.setText("");
         editPwd.setText("");
         editUsername.setText("");
         editMail.setText("");
     }
 
-    class RegData{
+    class RegData {
         private int success;
         private String content;
 
-        public RegData(){}
+        public RegData() {
+        }
 
-        public int getSuccess(){
+        public int getSuccess() {
             return success;
         }
 
-        public String getContent(){
+        public String getContent() {
             return content;
         }
-    };
+    }
+
+    ;
 }

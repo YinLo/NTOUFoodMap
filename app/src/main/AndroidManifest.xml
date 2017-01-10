@@ -6,18 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
+         location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true"></uses-feature>
 
     <application
         android:allowBackup="true"
@@ -40,7 +35,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".IndexActivity"
-            android:parentActivityName=".MainActivity" />/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RecommendActivity"
             android:parentActivityName=".IndexActivity" />
@@ -69,19 +64,10 @@
 
         <activity
             android:name=".AppraiseActivity"
-<<<<<<< HEAD
             android:parentActivityName=".StoreActivity" />
-        />
         <activity
             android:name=".CommentActivity"
             android:parentActivityName=".AppraiseActivity" />
-        />
-=======
-            android:parentActivityName=".StoreActivity" />/>
-        <activity
-            android:name=".CommentActivity"
-            android:parentActivityName=".AppraiseActivity" />/>
->>>>>>> 1bc98fa6e385d76f64c1419d85b58431979204be
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

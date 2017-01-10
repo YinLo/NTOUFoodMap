@@ -34,7 +34,7 @@
             android:padding="2dp">
 
             <TextView
-                android:text="商店名稱"
+                android:text="店家名稱"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtStorename"
