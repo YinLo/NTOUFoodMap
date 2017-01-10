@@ -33,7 +33,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -134,7 +139,7 @@ public class AddActivity extends AppCompatActivity {
                     String response = "";
                     try {
                         response = ConnectAPI.sendPost("API/addStores.php", "name=" + editStorename.getText().toString() + "&address=" + editAddress.getText().toString() + "&bh=" +
-                                editBusinesshour.getText().toString() + "&tel=" + editPhone.getText().toString() + "&tag="+spirTag.getSelectedItem().toString() +"&image="+imgStoreURL+"&menuImg="+imgmenuURL);
+                                editBusinesshour.getText().toString() + "&tel=" + editPhone.getText().toString() + "&tag="+spirTag.getSelectedItem().toString()/* +"&image="+imgStoreURL+"&menuImg="+imgmenuURL*/);
                         //response = ConnectAPI.sendPost("API/addStores.php", "");
                         //Toast.makeText(AddActivity.this, spirTag.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
@@ -163,9 +168,10 @@ public class AddActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
             Log.e("uri", uri.toString());
+
+
             ContentResolver cr = this.getContentResolver();
             try {
-
                 Bitmap bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri));
                 ImageView imageView = null;
                 if (img_selected == "R.id.imgStore") {
@@ -177,17 +183,19 @@ public class AddActivity extends AppCompatActivity {
                     imgmenuURL = uri.toString();
                     imagepath = imgmenuURL;
                 }
+
                 /* 将Bitmap设定到ImageView */
                 Toast.makeText(AddActivity.this, "Uploading file path:" +imagepath, Toast.LENGTH_LONG).show();
                 imageView.setImageBitmap(bitmap);
-
+                cr.openInputStream(uri).close();
             } catch (FileNotFoundException e) {
                 Log.e("Exception", e.getMessage(), e);
-            }
+            } catch ( IOException e) {}
 
 
 
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void clearEditText(){
