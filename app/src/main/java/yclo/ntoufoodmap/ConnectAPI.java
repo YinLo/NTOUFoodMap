@@ -30,7 +30,6 @@ public class ConnectAPI{
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
         // Send post request
-        con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(wr, "UTF-8"));
         writer.write(parameters);
