@@ -25,9 +25,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static yclo.ntoufoodmap.Cookies.getStoreForTag;
 import static yclo.ntoufoodmap.R.array.tag_list;
 
 public class RecommendActivity extends AppCompatActivity {
@@ -35,10 +37,13 @@ public class RecommendActivity extends AppCompatActivity {
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
-    private ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
-    private ArrayList<String> store_name = Cookies.getStoreName();
-    private ArrayList<Float> scoring = Cookies.getStoreScore();
+    static ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
+    static ArrayList<String> store_name = Cookies.getStoreName();
+    static ArrayList<Float> scoring = Cookies.getStoreScore();
     ArrayList<String> tag = Cookies.getStoreTag();
+    static ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
+    static ArrayList<String> address = Cookies.getStoreAddress();
+    static ArrayList<String> telephone = Cookies.getStoreTelephone();
     static int selectdStore;
 
     @Override
@@ -65,20 +70,32 @@ public class RecommendActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                for(int i=0;i<tag.size();i++) {
-                    if (tag.get(i) != parent.getSelectedItem().toString() || parent.getSelectedItem().toString()=="全部") {
-                        store_list.getChildAt(i).setVisibility(View.VISIBLE);
-                        //Toast.makeText(RecommendActivity.this, String.valueOf(i), Toast.LENGTH_SHORT).show();
-                    } else {
-                        store_list.getChildAt(i).setVisibility(View.GONE);
-                    }
+                if(parent.getSelectedItem().toString().equals("全部")){
+                    store_id = Cookies.getStoreID();  // 搜尋資料庫用
+                    store_name = Cookies.getStoreName();
+                    scoring = Cookies.getStoreScore();
+                    tag = Cookies.getStoreTag();
+                    businesshours = Cookies.getStoreBusinesshours();
+                    telephone = Cookies.getStoreTelephone();
+                    address = Cookies.getStoreAddress();
                 }
+                else {
+                    ArrayList<StoreList> store_listfortag = getStoreForTag(parent.getSelectedItem().toString());
+                    store_id = Cookies.getStoreIDForTag(store_listfortag);
+                    store_name = Cookies.getStoreNameForTag(store_listfortag);
+                    scoring = Cookies.getStoreScoreForTag(store_listfortag);
+                    tag = Cookies.getStoreAddressForTag(store_listfortag);
+                    businesshours = Cookies.getStoreBusinesshoursForTag(store_listfortag);
+                    telephone = Cookies.getStoreTelephoneForTag(store_listfortag);
+                    address = Cookies.getStoreAddressForTag(store_listfortag);
+                }
+
+                store_list.setAdapter(new StoreAdapter(RecommendActivity.this, store_id, store_name, scoring));
+                //Toast.makeText(RecommendActivity.this, store_listfortag..toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 

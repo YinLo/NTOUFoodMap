@@ -50,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
-        String addressString = Cookies.getStoreAddress().get(indexOfList_prefs);
+        String addressString = RecommendActivity.address.get(indexOfList_prefs);
         Log.v("zz",addressString);
         double latitude = 0;
         double longitude = 0;

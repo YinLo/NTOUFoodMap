@@ -122,8 +122,75 @@ public class Cookies {
 
 
 
-    public static ArrayList<StoreList> getStore(){
-        return store;
+    public static ArrayList<StoreList> getStoreForTag(String tag){
+        ArrayList<StoreList>tmp = new ArrayList<>();
+        for(StoreList s:store){
+            if(s.getTag().equals(tag)){
+                tmp.add(s);
+            }
+        }
+        return  tmp;
+    }
+
+    public static ArrayList<Integer> getStoreIDForTag(ArrayList<StoreList> tmp){
+        ArrayList<Integer> id = new ArrayList<>();
+        for(StoreList s : tmp){
+            id.add(s.getStoreid());
+        }
+        return id;
+    }
+    public static ArrayList<String> getStoreNameForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> name = new ArrayList<>();
+        for(StoreList s : tmp){
+            name.add(s.getStorename());
+        }
+        return name;
+    }
+    public static ArrayList<String> getStoreAddressForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> address = new ArrayList<>();
+        for(StoreList s : tmp){
+            address.add(s.getAddress());
+        }
+        return address;
+    }
+    public static ArrayList<String> getStoreBusinesshoursForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> bussinseehours = new ArrayList<>();
+        for(StoreList s : tmp){
+            bussinseehours.add(s.getBusinesshours());
+        }
+        return bussinseehours;
+    }
+
+    public static ArrayList<String> getStoreTelephoneForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> telephone = new ArrayList<>();
+        for(StoreList s : tmp){
+            telephone.add(s.getTelephone());
+        }
+        return telephone;
+    }
+
+    public static ArrayList<String> getStoreTagForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> tag = new ArrayList<>();
+        for(StoreList s : tmp){
+            tag.add(s.getTag());
+        }
+        return tag;
+    }
+
+    public static ArrayList<String> getStoreImageForTag(ArrayList<StoreList> tmp){
+        ArrayList<String> image = new ArrayList<>();
+        for(StoreList s : tmp){
+            image.add(s.getImage());
+        }
+        return image;
+    }
+
+    public static ArrayList<Float> getStoreScoreForTag(ArrayList<StoreList> tmp){
+        ArrayList<Float> score = new ArrayList<>();
+        for(StoreList s : tmp){
+            score.add(s.getScore());
+        }
+        return score;
     }
 
 }
