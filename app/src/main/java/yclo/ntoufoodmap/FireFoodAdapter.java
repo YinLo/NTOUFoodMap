@@ -8,17 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by user on 2016/12/13.
  */
 public class FireFoodAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    String[] food_name; //食物
-    String[] store_name;  //食物所在之餐廳名稱
-    String[] like_count;  //按讚數量
+    ArrayList<String> food_name; //食物
+    ArrayList<String> store_name;  //食物所在之餐廳名稱
+    ArrayList<Integer> like_count;  //按讚數量
 
-    public FireFoodAdapter(Context c, String[] food_name, String[] store_name, String[] like_count) {
+    public FireFoodAdapter(Context c, ArrayList<String> food_name, ArrayList<String> store_name, ArrayList<Integer> like_count) {
         inflater = LayoutInflater.from(c);
         this.food_name = food_name;
         this.store_name = store_name;
@@ -26,7 +28,7 @@ public class FireFoodAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return food_name.length;
+        return food_name.size();
     }
 
     public Object getItem(int i) {
@@ -43,9 +45,9 @@ public class FireFoodAdapter extends BaseAdapter {
         txt_foodname = (TextView) view.findViewById(R.id.food_name);
         txt_storename = (TextView) view.findViewById(R.id.store_name);
         txt_likecount = (TextView) view.findViewById(R.id.like_count);
-        txt_foodname.setText(food_name[i]);
-        txt_storename.setText(store_name[i]);
-        txt_likecount.setText(like_count[i]);
+        txt_foodname.setText(food_name.get(i));
+        txt_storename.setText(store_name.get(i));
+        txt_likecount.setText(like_count.get(i).toString());
         return view;
     }
 
