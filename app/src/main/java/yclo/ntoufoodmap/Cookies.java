@@ -1,17 +1,13 @@
 package yclo.ntoufoodmap;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-
-import java.lang.reflect.Type;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Yin on 2017/1/8.
@@ -25,12 +21,15 @@ public class Cookies {
     private static ArrayList<StoreList> store;
     private static int storeid;
 
-    static{
-        try{
-            String r = ConnectAPI.sendPost("API/getStores.php","");
-            Type type = (Type) new TypeToken<List<StoreList>>(){}.getType();
+    static {
+        try {
+            String r = ConnectAPI.sendPost("API/getStores.php", "");
+            Type type = (Type) new TypeToken<List<StoreList>>() {
+            }.getType();
             store = new Gson().fromJson(r, (java.lang.reflect.Type) type);
-        }catch (Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void setUserid(String u) {
@@ -57,79 +56,153 @@ public class Cookies {
         return rights;
     }
 
-    public static ArrayList<Integer> getStoreID(){
+    public static ArrayList<Integer> getStoreID() {
         ArrayList<Integer> id = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             id.add(s.getStoreid());
         }
         return id;
     }
 
-    public static ArrayList<String> getStoreName(){
+    public static ArrayList<String> getStoreName() {
         ArrayList<String> name = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             name.add(s.getStorename());
         }
         return name;
     }
 
-    public static ArrayList<String> getStoreAddress(){
+    public static ArrayList<String> getStoreAddress() {
         ArrayList<String> address = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             address.add(s.getAddress());
         }
         return address;
     }
 
-    public static ArrayList<String> getStoreBusinesshours(){
+    public static ArrayList<String> getStoreBusinesshours() {
         ArrayList<String> businesshours = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             businesshours.add(s.getBusinesshours());
         }
         return businesshours;
     }
 
-    public static ArrayList<String> getStoreTelephone(){
+    public static ArrayList<String> getStoreTelephone() {
         ArrayList<String> telephone = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             telephone.add(s.getTelephone());
         }
         return telephone;
     }
 
-    public static ArrayList<String> getStoreTag(){
+    public static ArrayList<String> getStoreTag() {
         ArrayList<String> tag = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             tag.add(s.getTag());
         }
         return tag;
     }
 
-    public static ArrayList<String> getStoreImage(){
+    public static ArrayList<String> getStoreImage() {
         ArrayList<String> image = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             image.add(s.getImage());
         }
         return image;
     }
 
-    public static ArrayList<Float> getStoreScore(){
+    public static ArrayList<Float> getStoreScore() {
         ArrayList<Float> score = new ArrayList<>();
-        for(StoreList s : store){
+        for (StoreList s : store) {
             score.add(s.getScore());
         }
         return score;
     }
 
-    public static ArrayList<StoreList> getStore(){
+    public static ArrayList<StoreList> getStore() {
         return store;
     }
 
-    public static int getStoreid(){
+    public static ArrayList<StoreList> getStoreForTag(String tag) {
+        ArrayList<StoreList> tmp = new ArrayList<>();
+        for (StoreList s : store) {
+            if (s.getTag().equals(tag)) {
+                tmp.add(s);
+            }
+        }
+        return tmp;
+    }
+
+    public static ArrayList<Integer> getStoreIDForTag(ArrayList<StoreList> tmp) {
+        ArrayList<Integer> id = new ArrayList<>();
+        for (StoreList s : tmp) {
+            id.add(s.getStoreid());
+        }
+        return id;
+    }
+
+    public static ArrayList<String> getStoreNameForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> name = new ArrayList<>();
+        for (StoreList s : tmp) {
+            name.add(s.getStorename());
+        }
+        return name;
+    }
+
+    public static ArrayList<String> getStoreAddressForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> address = new ArrayList<>();
+        for (StoreList s : tmp) {
+            address.add(s.getAddress());
+        }
+        return address;
+    }
+
+    public static ArrayList<String> getStoreBusinesshoursForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> bussinseehours = new ArrayList<>();
+        for (StoreList s : tmp) {
+            bussinseehours.add(s.getBusinesshours());
+        }
+        return bussinseehours;
+    }
+
+    public static ArrayList<String> getStoreTelephoneForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> telephone = new ArrayList<>();
+        for (StoreList s : tmp) {
+            telephone.add(s.getTelephone());
+        }
+        return telephone;
+    }
+
+    public static ArrayList<String> getStoreTagForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> tag = new ArrayList<>();
+        for (StoreList s : tmp) {
+            tag.add(s.getTag());
+        }
+        return tag;
+    }
+
+    public static ArrayList<String> getStoreImageForTag(ArrayList<StoreList> tmp) {
+        ArrayList<String> image = new ArrayList<>();
+        for (StoreList s : tmp) {
+            image.add(s.getImage());
+        }
+        return image;
+    }
+
+    public static ArrayList<Float> getStoreScoreForTag(ArrayList<StoreList> tmp) {
+        ArrayList<Float> score = new ArrayList<>();
+        for (StoreList s : tmp) {
+            score.add(s.getScore());
+        }
+        return score;
+    }
+
+    public static int getStoreid() {
         return storeid;
     }
 
-    public static void setStoreid(int sid){
+    public static void setStoreid(int sid) {
         storeid = sid;
     }
 }

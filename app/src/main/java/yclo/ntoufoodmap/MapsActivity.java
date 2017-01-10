@@ -2,27 +2,22 @@ package yclo.ntoufoodmap;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import android.location.Address;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.vision.barcode.Barcode;
-import android.os.Message;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
-import android.os.Handler;
-
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -55,7 +50,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
-        String addressString = Cookies.getStoreAddress().get(indexOfList_prefs);
+        String addressString = RecommendActivity.address.get(indexOfList_prefs);
         Log.v("zz",addressString);
         double latitude = 0;
         double longitude = 0;
@@ -84,6 +79,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16));     // 放大地圖到 16 倍大
-    }
 
+    }
 }
