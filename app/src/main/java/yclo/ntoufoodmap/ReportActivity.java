@@ -7,18 +7,23 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.gson.Gson;
 
 public class ReportActivity extends AppCompatActivity {
 
     ImageButton btnCorrect = null;
     ImageButton btnCancel = null;
+    EditText editreport;
+    private Gson gson = new Gson();
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -58,12 +63,20 @@ public class ReportActivity extends AppCompatActivity {
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // 左方按鈕方法
+                        editreport = (EditText)findViewById(R.id.editReport);
+                        String response = "";
+                        try {
+                            response = ConnectAPI.sendPost("API/addError.php", "storeid=" + Cookies.getStoreid() + "&userid=" + Cookies.getUserid() + "&con=" + editreport.getText().toString());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                        //傳送成功訊息
+                        ReportActivity.ReportData ReportData = gson.fromJson(response, ReportActivity.ReportData.class);
+
                         Toast toast = Toast.makeText(ReportActivity.this,
-                                "成功送出!", Toast.LENGTH_LONG);
-                        //顯示Toast
+                                ReportData.getContent(), Toast.LENGTH_SHORT);
                         toast.show();
+
                         Intent intent = new Intent();
                         intent.setClass(ReportActivity.this, StoreActivity.class);
 
@@ -90,11 +103,6 @@ public class ReportActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // 左方按鈕方法
 
-                        //傳送成功訊息
-                        Toast toast = Toast.makeText(ReportActivity.this,
-                                "成功送出!", Toast.LENGTH_LONG);
-                        //顯示Toast
-                        toast.show();
                         Intent intent = new Intent();
                         intent.setClass(ReportActivity.this, StoreActivity.class);
 
@@ -111,5 +119,19 @@ public class ReportActivity extends AppCompatActivity {
         about_dialog.show();
     }
 
+    class ReportData {
+        private int success;
+        private String content;
 
+        public ReportData() {
+        }
+
+        public int getSuccess() {
+            return success;
+        }
+
+        public String getContent() {
+            return content;
+        }
+    }
 }
