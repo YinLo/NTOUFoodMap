@@ -124,6 +124,7 @@ public class Cookies {
         return store;
     }
 
+<<<<<<< HEAD
     public static ArrayList<StoreList> getStoreForTag(String tag) {
         ArrayList<StoreList> tmp = new ArrayList<>();
         for (StoreList s : store) {
@@ -196,6 +197,11 @@ public class Cookies {
             score.add(s.getScore());
         }
         return score;
+=======
+
+    public static ArrayList<StoreList> getStore(){
+        return store;
+>>>>>>> parent of d0dad82... tag to select store by wei
     }
 
     public static int getStoreid() {
