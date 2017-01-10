@@ -30,6 +30,7 @@ public class ConnectAPI{
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        //con.setRequestProperty("Content-Type", "multipart/form-data");
 
         // Send post request
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
@@ -41,6 +42,7 @@ public class ConnectAPI{
         wr.close();
 
         int responseCode = con.getResponseCode();
+
 //        System.out.println("\nSending 'POST' request to URL : " + url);
 //        System.out.println("Post parameters : " + parameters);
 //        System.out.println("Response Code : " + responseCode);

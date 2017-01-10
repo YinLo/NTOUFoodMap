@@ -3,13 +3,19 @@ package yclo.ntoufoodmap;
 import android.Manifest;
 
 import static android.Manifest.permission.*;
+import static android.R.attr.bitmap;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -40,6 +47,8 @@ public class AddActivity extends AppCompatActivity {
     private Button btnRegist;
     private String imgStoreURL = "";
     private String imgmenuURL = "";
+
+    private String imagepath=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,14 +82,12 @@ public class AddActivity extends AppCompatActivity {
                                     READ_EXTERNAL_STORAGE},
                             REQUEST_EXTERNAL_STORAGE
                     );
-                    Intent intent = new Intent();
-                    /* 开启Pictures画面Type设定为image */
-                    intent.setType("image/*");
-                    /* 使用Intent.ACTION_GET_CONTENT这个Action */
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                    /* 取得相片后返回本画面 */
-                    startActivityForResult(intent, 1);
                 }
+
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
             }
 
         });
@@ -100,14 +107,12 @@ public class AddActivity extends AppCompatActivity {
                                     READ_EXTERNAL_STORAGE},
                             REQUEST_EXTERNAL_STORAGE
                     );
-                    Intent intent = new Intent();
-                     /* 开启Pictures画面Type设定为image */
-                    intent.setType("image/*");
-                     /* 使用Intent.ACTION_GET_CONTENT这个Action */
-                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                     /* 取得相片后返回本画面 */
-                    startActivityForResult(intent, 1);
                 }
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Complete action using"), 1);
+
             }
 
         });
@@ -128,9 +133,10 @@ public class AddActivity extends AppCompatActivity {
                 } else {
                     String response = "";
                     try {
-                        response = ConnectAPI.sendPost("API/addStores.php", "name=" + editStorename.getText().toString() + "&address=" + editAddress.getText().toString() + "&bh=" + editBusinesshour.getText().toString() + "&tel=" + editPhone.getText().toString() + "&tag="+spirTag.getTag().toString()/*+"&image="+imgStoreURL+"&menuImg="+imgmenuURL*/);
+                        response = ConnectAPI.sendPost("API/addStores.php", "name=" + editStorename.getText().toString() + "&address=" + editAddress.getText().toString() + "&bh=" +
+                                editBusinesshour.getText().toString() + "&tel=" + editPhone.getText().toString() + "&tag="+spirTag.getSelectedItem().toString() +"&image="+imgStoreURL+"&menuImg="+imgmenuURL);
                         //response = ConnectAPI.sendPost("API/addStores.php", "");
-                       //Log.v("aaa",  "name=" + editStorename.getText().toString() + "&address=" + editAddress.getText().toString() + "&bh=" + editBusinesshour.getText().toString() + "&tel=" + editPhone.getText().toString() + "&tag="+spirTag.getTag().toString()+"&image="+imgStoreURL+"&menuImg="+imgmenuURL );
+                        //Toast.makeText(AddActivity.this, spirTag.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -142,7 +148,7 @@ public class AddActivity extends AppCompatActivity {
                         clearEditText();
                     }else if(addsD.getSuccess() == 0){
                         dialog.setTitle("錯誤");
-                        dialog.setMessage("請輸入店家名稱");
+                        dialog.setMessage(addsD.getContent());
                         dialog.show();
                         clearEditText();
                     }
@@ -153,8 +159,6 @@ public class AddActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
-        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
             Uri uri = data.getData();
@@ -166,18 +170,24 @@ public class AddActivity extends AppCompatActivity {
                 ImageView imageView = null;
                 if (img_selected == "R.id.imgStore") {
                     imageView = (ImageView) findViewById(R.id.imgStore);
-                    imgStoreURL = cr.openInputStream(uri).toString();
+                    imgStoreURL = uri.toString();
+                    imagepath = imgStoreURL;
                 } else if (img_selected == "R.id.imgMenu") {
                     imageView = (ImageView) findViewById(R.id.imgMenu);
-                    imgmenuURL = cr.openInputStream(uri).toString();
+                    imgmenuURL = uri.toString();
+                    imagepath = imgmenuURL;
                 }
                 /* 将Bitmap设定到ImageView */
+                Toast.makeText(AddActivity.this, "Uploading file path:" +imagepath, Toast.LENGTH_LONG).show();
                 imageView.setImageBitmap(bitmap);
+
             } catch (FileNotFoundException e) {
                 Log.e("Exception", e.getMessage(), e);
             }
-        }
 
+
+
+        }
     }
 
     private void clearEditText(){
@@ -201,4 +211,9 @@ public class AddActivity extends AppCompatActivity {
             return content;
         }
     }
+
+
+
+
+
 }
