@@ -33,7 +33,9 @@ import static yclo.ntoufoodmap.Cookies.getStoreForTag;
 import static yclo.ntoufoodmap.R.array.tag_list;
 
 public class RecommendActivity extends AppCompatActivity {
-
+    static{
+        Cookies.update();
+    }
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
