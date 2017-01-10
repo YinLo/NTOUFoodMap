@@ -1,6 +1,8 @@
 package yclo.ntoufoodmap;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -32,6 +35,10 @@ public class AppraiseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appraise);
 
+        TextView store_name = (TextView) findViewById(R.id.txtStorename);
+        SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
+        int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
+        store_name.setText(RecommendActivity.store_name.get(indexOfList_prefs));
 
 
         try {
