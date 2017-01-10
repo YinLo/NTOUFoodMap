@@ -63,17 +63,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addressLocation = geoCoder.getFromLocationName(addressString, 1);
-            latitude = addressLocation.get(0).getLatitude();
-            longitude = addressLocation.get(0).getLongitude();
-            // Add a marker in Sydney and move the camera
-            // LatLng sydney = new LatLng(-34, 151);  原本的座標值是雪梨某處
-            // 替換上美麗島站的座標
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         LatLng sydney = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title(addressString));
 

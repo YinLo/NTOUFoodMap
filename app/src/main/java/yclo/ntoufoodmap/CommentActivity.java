@@ -6,13 +6,26 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import org.w3c.dom.Comment;
+
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
 
 public class CommentActivity extends AppCompatActivity {
 
     ImageButton btnCorrect = null;
     ImageButton btnCancel = null;
+    EditText editcomment;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +59,22 @@ public class CommentActivity extends AppCompatActivity {
                 .setPositiveButton("是", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // 左方按鈕方法
+                        editcomment = (EditText)findViewById(R.id.editComment);
+                        String response = "";
+                        try {
+                            RatingBar rt = (RatingBar) findViewById(R.id.ratingBar);
+                            response = ConnectAPI.sendPost("API/addComments.php", "storeid=" + Cookies.getStoreid() + "&userid=" + Cookies.getUserid() + "&rt=" + rt.getRating() + "&con=" + editcomment.getText());
+                            //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                        //傳送成功訊息
+                        CommentData CommentData = gson.fromJson(response, CommentData.class);
+
                         Toast toast = Toast.makeText(CommentActivity.this,
-                                "成功送出!", Toast.LENGTH_LONG);
-                        //顯示Toast
+                                CommentData.getContent(), Toast.LENGTH_SHORT);
                         toast.show();
+
                         Intent intent = new Intent();
                         intent.setClass(CommentActivity.this, AppraiseActivity.class);
 
@@ -78,11 +101,6 @@ public class CommentActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         // 左方按鈕方法
 
-                        //傳送成功訊息
-                        Toast toast = Toast.makeText(CommentActivity.this,
-                                "成功送出!", Toast.LENGTH_LONG);
-                        //顯示Toast
-                        toast.show();
                         Intent intent = new Intent();
                         intent.setClass(CommentActivity.this, StoreActivity.class);
 
@@ -97,5 +115,22 @@ public class CommentActivity extends AppCompatActivity {
                 });
         AlertDialog about_dialog = builder.create();
         about_dialog.show();
+    }
+
+
+    class CommentData {
+        private int success;
+        private String content;
+
+        public CommentData() {
+        }
+
+        public int getSuccess() {
+            return success;
+        }
+
+        public String getContent() {
+            return content;
+        }
     }
 }
