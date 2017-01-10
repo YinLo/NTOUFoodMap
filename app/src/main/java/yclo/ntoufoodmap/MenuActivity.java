@@ -42,7 +42,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     //切換至套餐清單
-    private void onClickSetMeal(View v) {
+    public void onClickSetMeal(View v) {
         // TODO Auto-generated method stub
         //儲存該餐點種類
         editor.putString("MealType_PREFS", "套餐" );
@@ -55,7 +55,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     //切換至主餐清單
-    private void onClickMainCourse(View v) {
+    public void onClickMainCourse(View v) {
         // TODO Auto-generated method stub
         //儲存該餐點種類
         editor.putString("MealType_PREFS", "主餐" );
@@ -68,7 +68,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     //切換至飲料清單
-    private void onClickDrink(View v) {
+    public void onClickDrink(View v) {
         // TODO Auto-generated method stub
         //儲存該餐點種類
         editor.putString("MealType_PREFS", "飲料" );

@@ -23,8 +23,8 @@ public class StoreActivity extends AppCompatActivity {
     ImageButton btnReport = null;
     TextView txtHours = null;
     TextView txtPhone = null;
-    ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
-    ArrayList<String> telephone = Cookies.getStoreTelephone();
+//    ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
+//    ArrayList<String> telephone = Cookies.getStoreTelephone();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,13 @@ public class StoreActivity extends AppCompatActivity {
         //取出Index of Store List
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
-        store_name.setText(Cookies.getStoreName().get(indexOfList_prefs));
+        store_name.setText(RecommendActivity.store_name.get(indexOfList_prefs));
 
 
         //商店評分
         float RatingBarOfList_prefs = prefs.getFloat("RatingBarOfList_PREFS", 0);
         RatingBar rb_scoring = (RatingBar) findViewById(R.id.ratingBar);
-        rb_scoring.setRating(Cookies.getStoreScore().get(indexOfList_prefs));
+        rb_scoring.setRating(RecommendActivity.scoring.get(indexOfList_prefs));
         if (RatingBarOfList_prefs == 0) {
             rb_scoring.setRating(0);
         }
@@ -66,17 +66,17 @@ public class StoreActivity extends AppCompatActivity {
         });
 
         txtHours = (TextView)findViewById(R.id.txtHours);
-        txtHours.setText(businesshours.get(indexOfList_prefs));
+        txtHours.setText(RecommendActivity.businesshours.get(indexOfList_prefs));
 
         txtPhone = (TextView)findViewById(R.id.txtPhone);
-        txtPhone.setText(telephone.get(indexOfList_prefs));
+        txtPhone.setText(RecommendActivity.telephone.get(indexOfList_prefs));
 
 
     }
 
 
     //切換至餐點清單
-    private void onClickMenu(View v) {
+    public void onClickMenu(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, MenuActivity.class);
@@ -84,7 +84,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     //切換至地圖
-    private void onClickMap(View v) {
+    public void onClickMap(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, MapsActivity.class);
@@ -92,7 +92,7 @@ public class StoreActivity extends AppCompatActivity {
     }
 
     //切換至餐點清單
-    private void onClickComments(View v) {
+    public void onClickComments(View v) {
         // TODO Auto-generated method stub
         Intent intent = new Intent();
         intent.setClass(StoreActivity.this, AppraiseActivity.class);
