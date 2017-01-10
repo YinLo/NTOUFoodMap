@@ -30,7 +30,13 @@ public class Cookies {
             store = new Gson().fromJson(r, (java.lang.reflect.Type) type);
         }catch (Exception e){e.printStackTrace();}
     }
-
+    public static void update(){
+        try{
+            String r = ConnectAPI.sendPost("API/getStores.php","");
+            Type type = (Type) new TypeToken<List<StoreList>>(){}.getType();
+            store = new Gson().fromJson(r, (java.lang.reflect.Type) type);
+        }catch (Exception e){e.printStackTrace();}
+    }
     public static void setUserid(String u) {
         userid = u;
     }
