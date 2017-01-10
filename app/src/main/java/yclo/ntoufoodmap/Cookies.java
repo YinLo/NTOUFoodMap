@@ -18,7 +18,6 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class Cookies {
-    Context pref;
     private static String userid;
     private static String username;
     private static int rights;
