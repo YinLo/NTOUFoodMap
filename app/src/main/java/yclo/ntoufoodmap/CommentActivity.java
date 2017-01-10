@@ -76,6 +76,7 @@ public class CommentActivity extends AppCompatActivity {
                                 CommentData.getContent(), Toast.LENGTH_SHORT);
                         toast.show();
                         Cookies.update();
+                        RecommendActivity.scoring = Cookies.getStoreScore();
                         Intent intent = new Intent();
                         intent.setClass(CommentActivity.this, AppraiseActivity.class);
 

@@ -50,7 +50,6 @@ public class RecommendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recommend);
 
         final ArrayList<String> store = Cookies.getStoreName();
-        scoring = Cookies.getStoreScore();
 
         //種類標籤下拉式選單
         final Spinner spinner = (Spinner) findViewById(R.id.spirTag);
