@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.List;
@@ -51,10 +52,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SharedPreferences prefs = getSharedPreferences("Store", Context.MODE_PRIVATE);
         int indexOfList_prefs = prefs.getInt("IndexOfList_PREFS", -1);
         String addressString = RecommendActivity.address.get(indexOfList_prefs);
-        Log.v("zz",addressString);
+        Log.v("zz", addressString);
         double latitude = 0;
         double longitude = 0;
-
+        try {
+            String response = ConnectAPI.sendPost("API/getGPS.php", "address=" + addressString);
+            Mapdata userData = new Gson().fromJson(response, Mapdata.class);
+            latitude = userData.getLat();
+            longitude = userData.getLng();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
         try {
             List<Address> addressLocation = geoCoder.getFromLocationName(addressString, 1);
@@ -63,22 +71,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Add a marker in Sydney and move the camera
             // LatLng sydney = new LatLng(-34, 151);  原本的座標值是雪梨某處
             // 替換上美麗島站的座標
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        LatLng sydney = new LatLng(latitude,longitude);
+        LatLng sydney = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(sydney).title(addressString));
 
         mMap.getUiSettings().setZoomControlsEnabled(true);  // 右下角的放大縮小功能
         mMap.getUiSettings().setCompassEnabled(true);       // 左上角的指南針，要兩指旋轉才會出現
         mMap.getUiSettings().setMapToolbarEnabled(true);    // 右下角的導覽及開啟 Google Map功能
 
-        Log.d("TAG", "最高放大層級："+mMap.getMaxZoomLevel());
-        Log.d("TAG", "最低放大層級："+mMap.getMinZoomLevel());
+        Log.d("TAG", "最高放大層級：" + mMap.getMaxZoomLevel());
+        Log.d("TAG", "最低放大層級：" + mMap.getMinZoomLevel());
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16));     // 放大地圖到 16 倍大
+    }
+
+    class Mapdata {
+        double lat;
+        double lng;
+
+        public Mapdata() {
+        }
+
+        public double getLat() {
+            return lat;
+        }
+
+        public double getLng() {
+            return lng;
+        }
 
     }
 }

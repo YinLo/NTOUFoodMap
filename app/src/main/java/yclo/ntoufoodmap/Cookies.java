@@ -22,7 +22,7 @@ public class Cookies {
     private static String username;
     private static int rights;
     private static ArrayList<StoreList> store;
-
+    private static int storeid;
     static{
         try{
             String r = ConnectAPI.sendPost("API/getStores.php","");
@@ -190,6 +190,14 @@ public class Cookies {
             score.add(s.getScore());
         }
         return score;
+    }
+
+    public static void setStoreid(int sid){
+        storeid = sid;
+    }
+
+    public static int getStoreid(){
+        return storeid;
     }
 
 }

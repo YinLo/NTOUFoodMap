@@ -44,7 +44,6 @@ public class RecommendActivity extends AppCompatActivity {
     static ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
     static ArrayList<String> address = Cookies.getStoreAddress();
     static ArrayList<String> telephone = Cookies.getStoreTelephone();
-    static int selectdStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +111,7 @@ public class RecommendActivity extends AppCompatActivity {
                 editor.putInt("IndexOfList_PREFS", position);
                 editor.putFloat("RatingBarOfList_PREFS", scoring.get(position));
                 editor.commit();
-                selectdStore = store_id.get(position);
+                Cookies.setStoreid(store_id.get(position));
 
                 //換頁
                 Intent intent = new Intent();

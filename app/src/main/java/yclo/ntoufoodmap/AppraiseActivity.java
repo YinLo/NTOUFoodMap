@@ -35,7 +35,7 @@ public class AppraiseActivity extends AppCompatActivity {
 
 
         try {
-            String r = ConnectAPI.sendPost("API/getComment.php", "storeid=" + String.valueOf(RecommendActivity.selectdStore));
+            String r = ConnectAPI.sendPost("API/getComment.php", "storeid=" + String.valueOf(Cookies.getStoreid()));
             //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
             Type type = new TypeToken<List<CommentList>>() {
             }.getType();

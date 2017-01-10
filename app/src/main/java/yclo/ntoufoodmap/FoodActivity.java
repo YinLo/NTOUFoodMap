@@ -54,7 +54,7 @@ public class FoodActivity extends AppCompatActivity {
         }
 
         try {
-            String r = ConnectAPI.sendPost("API/getMenu.php", "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs);
+            String r = ConnectAPI.sendPost("API/getMenu.php", "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(Cookies.getStoreid()) + "&mealtype="+ mealType_prefs);
             //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
             Type type = new TypeToken<List<FoodList>>() {
             }.getType();

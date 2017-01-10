@@ -59,43 +59,4 @@ public class ConnectAPI{
         return  response.toString();
 
     }
-
-    public static String getGPS(String address) throws Exception{
-        URL obj = new URL("https://maps.google.com/maps/api/geocode/json");
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-        con.setDoInput (true);
-        con.setDoOutput (true);
-        con.setUseCaches (false);
-        //add reuqest header
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-
-        // Send post request
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(wr, "UTF-8"));
-        writer.write(address);
-        writer.flush();
-        writer.close();
-        wr.flush();
-        wr.close();
-
-        int responseCode = con.getResponseCode();
-//        System.out.println("\nSending 'POST' request to URL : " + url);
-//        System.out.println("Post parameters : " + parameters);
-//        System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        //print result
-        return  response.toString();
-    }
 }
