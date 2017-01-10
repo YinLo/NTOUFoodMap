@@ -37,13 +37,13 @@ public class RecommendActivity extends AppCompatActivity {
     ListView store_list;
     private Gson gson = new Gson();
     //店家列表 store_name:商店名稱
-    static ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
-    static ArrayList<String> store_name = Cookies.getStoreName();
-    static ArrayList<Float> scoring = Cookies.getStoreScore();
+    public static ArrayList<Integer> store_id = Cookies.getStoreID();  // 搜尋資料庫用
+    public static ArrayList<String> store_name = Cookies.getStoreName();
+    public static ArrayList<Float> scoring = Cookies.getStoreScore();
     ArrayList<String> tag = Cookies.getStoreTag();
-    static ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
-    static ArrayList<String> address = Cookies.getStoreAddress();
-    static ArrayList<String> telephone = Cookies.getStoreTelephone();
+    public static ArrayList<String> businesshours = Cookies.getStoreBusinesshours();
+    public static ArrayList<String> address = Cookies.getStoreAddress();
+    public static ArrayList<String> telephone = Cookies.getStoreTelephone();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

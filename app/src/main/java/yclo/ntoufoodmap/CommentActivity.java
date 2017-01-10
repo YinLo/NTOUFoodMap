@@ -63,7 +63,7 @@ public class CommentActivity extends AppCompatActivity {
                         String response = "";
                         try {
                             RatingBar rt = (RatingBar) findViewById(R.id.ratingBar);
-                            response = ConnectAPI.sendPost("API/addComments.php", "storeid=" + Cookies.getStoreid() + "&userid=" + Cookies.getUserid() + "&rt=" + rt.getRating() + "&con=" + editcomment.getText());
+                            response = ConnectAPI.sendPost("API/addComments.php", "storeid=" + Cookies.getStoreid() + "&userid=" + Cookies.getUserid() + "&rt=" + rt.getRating() + "&con=" + editcomment.getText().toString());
                             //Toast.makeText(getApplicationContext(),  "user=" + Cookies.getUserid() + "&storeid=" + String.valueOf(RecommendActivity.selectdStore) + "&mealtype="+ mealType_prefs, Toast.LENGTH_SHORT).show();
                         } catch (Exception e) {
                             e.printStackTrace();

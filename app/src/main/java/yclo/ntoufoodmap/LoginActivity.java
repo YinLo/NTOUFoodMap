@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (userData.getSuccess() == 1) {
                     if (userData.getContent().get("verfication").equals("1")) {
                         Cookies.setUserid(userData.getContent().get("userid"));
+                        Log.v("aaa",userData.getContent().get("userid"));
                         Cookies.setUsername(userData.getContent().get("username"));
                         Cookies.setRights(Integer.parseInt(userData.getContent().get("rights")));
                         Intent intent = new Intent();
