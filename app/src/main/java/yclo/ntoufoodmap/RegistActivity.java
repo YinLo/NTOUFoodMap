@@ -25,12 +25,13 @@ public class RegistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
 
-        btnRegister = (Button) findViewById(R.id.btnRegist);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
         editUserid = (EditText) findViewById(R.id.editUserid);
         editPwd = (EditText) findViewById(R.id.editPwd);
         editUsername = (EditText) findViewById(R.id.editUsername);
         editMail = (EditText) findViewById(R.id.editMail);
 
+       // btnRegister = (Button)findViewById(R.id.btnRegist);
         final AlertDialog.Builder dialog = new AlertDialog.Builder(RegistActivity.this);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,18 +39,22 @@ public class RegistActivity extends AppCompatActivity {
                 if (5 > editUserid.length() || editUserid.length() > 16) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入帳號(5~16字元)");
+                    dialog.show();
                 }else
                 if (5 > editPwd.length() || editPwd.length() > 16) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入密碼(5~16字元)");
+                    dialog.show();
                 }else
                 if (editUsername.length()<=0) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入使用者名稱");
+                    dialog.show();
                 }else
                 if (editMail.length()<=0) {
                     dialog.setTitle("警告");
                     dialog.setMessage("請輸入信箱");
+                    dialog.show();
                 }else{
                     try {
                         String p = "account="+editUserid.getText()+"&pwd="+editPwd.getText()+"&name="+editUsername.getText()+"&email="+editMail.getText();
@@ -58,10 +63,12 @@ public class RegistActivity extends AppCompatActivity {
                         if(rd.getSuccess() == 1){
                             dialog.setTitle("系統提示");
                             dialog.setMessage(rd.getContent());
+                            dialog.show();
                             clearText();
                         }else if(rd.getSuccess() == 0){
                             dialog.setTitle("系統錯誤");
                             dialog.setMessage(rd.getContent());
+                            dialog.show();
                             editMail.setText("");
                             editPwd.setText("");
                         }
